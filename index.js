@@ -24,4 +24,4 @@ client.on('message', message => {
         message.channel.send(`BabyRio is working in ${client.guilds.size} servers!`)
     }   
 });
-client.login('NTgxMjAzOTcwMjAzMTg5MjY5.XOb_sQ.hPUhTLJYydkmiFeKZn8FPXuVT8c')
+client.login('Bot-Token')
