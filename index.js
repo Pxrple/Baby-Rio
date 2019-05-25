@@ -26,6 +26,7 @@ const message_list = [
     "Sorry, Baby Rio Cant answer the call right now, Why? Because he doesn't have a phone! :rage:",
     "What?",
     "How Many people does it take to make a singular earth?",
+    "Don't hit me! :sob:"
     ];
 
 client.on('message', message => {
@@ -113,5 +114,4 @@ client.on('message', message => {
     message.channel.send({embed});
 
     }
-});//Bot Token
-client.login('Bot-Token')
+});
