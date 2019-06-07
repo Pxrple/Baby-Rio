@@ -3,14 +3,17 @@ const { prefix, token } = require('./config.json');
 const client = new Discord.Client();
 const { Client, RichEmbed } = require('discord.js');
 
+process.setMaxListeners(100)
+
 client.on('ready', () => {
     console.log(`BabyRio Loaded! Playing In ${client.guilds.size} Servers`)
 });
 const presence_list = [
-    "with BabyOri", 
-    "with Discord", 
-    "on BabyOri's Phone",
-    "Fighting BabyOri"
+    "with BabyOri 💕", 
+    "with Discord 💕", 
+    "on BabyOri's Phone 💕",
+    "Fighting BabyOri 😡",
+    "Creative on Goli 💕"
     ];
 
 client.on('ready', () => {
@@ -20,13 +23,15 @@ client.on('ready', () => {
     }, 20000);
 });
 const message_list = [
-    "I don't know you!",
-    "Leave me alone!",
+    "I don't know you....",
     "Are you a man or a woman?",
     "Sorry, Baby Rio Cant answer the call right now, Why? Because he doesn't have a phone! :rage:",
     "What?",
-    "How Many people does it take to make a singular earth?",
-    "Don't hit me! :sob:"
+    "How many people does it take to make a singular earth?",
+    "Don't hit me! :sob:",
+    "Shut up and let me drink my hot chocolate :coffee:",
+    "<:thonk:568875386243514398>",
+    ":runner:"
     ];
 
 client.on('message', message => {
@@ -50,7 +55,7 @@ client.on('message', message => {
     } else if (message.content.startsWith(`${prefix} How are you?`)) {
         message.reply('Considering you\'re speaking to me, Shit honestly');
     } else if (message.content.startsWith(`${prefix} Who do you love?`)) {
-        message.reply('Oribuuin & Baby Ori!');
+        message.reply('Oribuin & Baby Ori!');
     } else if (message.content.startsWith(`${prefix} Who are your friends?`)) {
         message.reply('My Brother Baby Ori!');
     } else if (message.content.startsWith(`${prefix} What is the meaning of`)) {
@@ -59,13 +64,14 @@ client.on('message', message => {
         message.reply('Yeah, I just felt a bit sick :nauseated_face:');
     } else if (message.content.startsWith(`What do you think ${prefix}`)) {
         message.reply('<:thonk:554462737166499840>');
-    }
-});//Discord Commands
-client.on('message', message => {
-    if (message.content.startsWith(`${prefix} Emo`)) {
-        message.channel.send('Emoji List:\n <:RobinYouWish:571098939823095813> ``RobinYouWish``\n<:RobinYay:571098924899762196> ``RobinYay``\n<:RobinThirsty:571098906361069568> ``RobinThirsty``\n<:RobinThatSucks:571098887998144514> ``RobinThatSucks``\n<:RobinSweet:571098868452687872> ``RobinSweet``\n<:RobinSrsly:571098852409475084> ``RobinSrsly``\n<:RobinShrug:571098837670690836> ``RobinShrug``\n<:RobinPizza:571098813239132160> ``RobinPizza``\n<:RobinNo:571098793915711490> ``RobinNo``\n<:RobinMaybe:571098781320478731> ``RobinMaybe``\n<:RobinLove:571098767328280588> ``RobinLove``\n<:RobinInspect:571098751205376010> ``RobinInspect``\n<:RobinIdk:571098727843102720> ``RobinIdk``\n<:RobinHi:571096709833293839> ``RobinHi``\n<:RobinHehe:571098710579347495> ``RobinHehe``\n<:RobinHeart:571098693504073739> ``RobinHeart``\n<:RobinHaha:571098676210958489> ``RobinHaha``\n<:RobinCringe:571098659459170335> ``RobinCringe``\n<:RobinThanks:571100648745992203>: ``RobinThanks``')
-    }
-});//Welcome Message 1
+    } else if (message.content.startsWith(`Sell wand`)) {
+        message.reply('No Sell Wands!');
+    } else if (message.content.includes('#github')) {
+        message.channel.send('Here you go :) https://github.com/Oribuin/')
+    } else if (message.content.includes('#discord')) {
+        message.channel.send('Discord Invite: https://discord.gg/c5JgrnA')
+	}
+});
 client.on('message', message => {
     if (message.content === 'RioWelcome') {
         const embed = new RichEmbed()
@@ -80,27 +86,68 @@ client.on('message', message => {
         .setURL("https://github.com/Oribuin/")
         .addField("Join our Minecraft Server!",
           ">> golinetwork.online <<")
-        .addField("Want to invite your friends to this server?", "https://discord.gg/4p3gGwg", true);
+        .addField("Want to invite your friends to this server?", "https://discord.gg/c5JgrnA", true);
        
         message.channel.send({embed});
     }
 });//Announcements
 client.on('message', message => {
-    if (message.content === 'RioAnnouncement') {
-        message.channel.send('**Announcement**');
+    if (message.content === 'RioAnnouncementф') {
+        message.channel.send('Hey Everyone! <:Bri_Wave:579035075102900229> [@everyone]\n \nWe are introducing two new features to the server <:Bri_Hyped:582685037833617419>\n\n 1: **Monthly Crates**\n*As Ori pinged on Thursday, We are releasing the Monthly Crates today! You will have 30 days to gain one but you can only get one once! They are available now on golinetwork.online* :wink:\n \n2: **Invite Rewards**\n \n*By the end of the month we are going to have a store voucher where the person who has the most discord invites can get a $15 voucher on the store* :wink:\n Type ``#leaderboard`` to view the amount of invites you have!\n \n~~pls invite people | we desperate~~ :(');
     }
 });//Welcome Message 2 | Working on 
 client.on('guildMemberAdd', member => {
-    const channel = member.guild.channels.find(ch => ch.name === '👋newplayers');
+    const channel = member.guild.channels.find(ch => ch.name === '👋new-players');
+    const embed = new RichEmbed()
+    .setAuthor("Goli Network\'s Official Discord!")
+    .setTitle(`Welcome to Goli Network ${member.displayName}`)
+    .setColor(0xF08080)
+    .setDescription(`Welcome to the Goli Network Discord! Be sure to read all of our discord server rules in <#546873908687667200>!\n \nCheck our <#546873898059300867> channel for all of the new updates! Enjoy & Have fun!\nDon't forget to link your account!`)
+    .setURL("http://golimc.craftingstore.net")
+    .setImage("https://cdn.discordapp.com/attachments/568862020594565130/580826398193614858/GoliLogo.png")
+    .setFooter("Type /discord link on golinetwork.online Hub & follow the instructions to link your account!")
+    .addBlankField(true)
+    .setThumbnail(`${member.user.avatarURL}`)
+    .addField("Join our Minecraft Server!",
+    ">> golinetwork.online <<")
+  .addField("Want to invite your friends to this server?", "[Discord Invite](https://discord.gg/c5JgrnA)", true)
+  .addField("Check for our server updates on our twitter!", "[Twitter](https://twitter.com/GoliNetwork)", true);
+
     if (!channel) return;
-    channel.send(`Welcome to the server ${member} If you need help feel free to ask for assistance!\nBot Prefixes:\nBabyRio [Rio]\nBabyOri [Ori]\nType 'OriGithub' for Oribuin's Github!`);
-});//Help Page
+    channel.send({embed});
+});
+client.on('guildMemberRemove', member => {
+    const channel = member.guild.channels.find(ch => ch.name === 'leaves');
+    if (!channel) return;
+    channel.send(`${member.displayName} Just left the server...`)
+})
+client.on('message', message => {
+    if (message.content === 'RioAdvert') {
+        const embed = new RichEmbed()
+        .setTitle('BabyRio Bot by Oribuin')
+        .setURL('https://github.com/Oribuin/')
+        .setAuthor('Goli Network - MC Server - 1.8-1.14')
+        .setDescription('__What is Goli Network?__ \n**Goli Network is a custom made minecraft server with new features added everyday! We use a number of premium plugins & custom codes to make the experience amazing for __everyone__!**')
+        .addBlankField(true)
+        .addField("**We currently have Skyblock released aswell as Factions & KitPvP being in the works and getting released very soon so keep an eye out for any of our server updates!**", "[Store](http://golimc.craftingstore.net/)")
+        .addField("Take a look at BabyOri & BabyRio's Github to know all the Commands available with this bot.", "[GitHub](https://github.com/Oribuin/)", true)
+        .addBlankField(true)
+        .setImage("https://cdn.discordapp.com/attachments/568862020594565130/580826398193614858/GoliLogo.png")
+        .addField("Join our Minecraft Server!",
+        ">> golinetwork.online <<")
+      .addField("Want to invite your friends to this server?", "[Discord Invite](https://discord.gg/c5JgrnA)", true)
+      .addField("Check for our server updates on our twitter!", "[Twitter](https://twitter.com/GoliNetwork)", true)
+      .setColor(0xF08080)
+
+    message.channel.send({embed});
+    }
+});
 client.on('message', message => {
     if (message.content === 'Rio Help') {
         const embed = new RichEmbed()
     .setTitle('GitHub Commands & Features')
     .setAuthor('Baby Bots\'s Commands', 'https://cdn.discordapp.com/attachments/353475877872599040/580064152001708052/image0.jpg')
-    .setDescription('Githubs: **Case Sensitive**')
+    .setDescription('Githubs: Githubs')
     .addField("[BabyOri README.md Page]", "[>>Click Me<<](https://github.com/Oribuin/BabyOri/blob/master/README.md)", true)
     .addField("[BabyRio README.md Page]", "[>>Click Me<<](https://github.com/Oribuin/Baby-Rio/blob/master/README.md)", true)
     .addBlankField(true)
@@ -108,10 +155,67 @@ client.on('message', message => {
     .setURL("https://github.com/Oribuin/")
     .addField("Join our Minecraft Server!",
       ">> golinetwork.online <<")
-    .addField("Want to invite your friends to this server?", "https://discord.gg/4p3gGwg", true)
+    .addField("Want to invite your friends to this server?", "https://discord.gg/c5JgrnA", true)
     .setColor(0x008080);
 
     message.channel.send({embed});
 
     }
+});//None Goli Help
+client.on('message', mesage => {
+    if (mesage.content === 'Rio') {
+        const embed = new RichEmbed()
+        .setTitle('GitHub Commands & Features')
+        .setAuthor('Baby Bots\'s Commands', 'https://cdn.discordapp.com/attachments/353475877872599040/580064152001708052/image0.jpg')
+        .setDescription("There isnt really many commands that you could do with BabyRio that aren't Ori's server related. You can @ BabyRio for a random response & Ask him questions...")
+        .addField("[BabyOri README.md Page]", "[>>Click Me<<](https://github.com/Oribuin/BabyOri/blob/master/README.md)", true)
+        .addField("[BabyRio README.md Page]", "[>>Click Me<<](https://github.com/Oribuin/Baby-Rio/blob/master/README.md)", true)
+        .setURL("https://github.com/Oribuin/")
+        .addField("Want to invite BabyRio?", "[Invite BabyRio](https://discordapp.com/oauth2/authorize?client_id=581203970203189269&permissions=53861440&scope=bot)")
+        .setColor(0x008080)
+        .setImage('https://cdn.discordapp.com/attachments/570699291585151017/582409246382227476/smile-shadow.png')
+
+        mesage.channel.send({embed});
+    }
 });
+client.on('message', message => {
+    if (message.content.startsWith(`${prefix} Favorite Color`)) {
+        const embed = new RichEmbed()
+        .setAuthor('Baby Rio\'s Favorite Color :)')
+        .setDescription('Light Coral (Red)\nHex Code: #F08080')
+        .setColor(0xF08080)
+        
+        message.channel.send({embed});
+    }
+});
+client.on('message', message => {
+    if (message.content.startsWith(`!s`)) {
+        const embed = new RichEmbed()
+        .setAuthor('New Suggestion')
+        .setTitle('Upvote | Downvote')
+        .setColor(0x008080)
+        .setDescription('Suggest Features to our server with:\n ``!s <suggestion>``')
+        .setThumbnail(`${message.author.displayAvatarURL}`)
+        .addBlankField(true)
+        .addField('**Suggestion:**',
+        `${message.author.lastMessage}`)
+
+        message.channel.send({embed})
+        message.channel.send(`NEW SUGGESTION BY ${message.author}`)
+    } else if (message.content.includes(`NEW SUGGESTION BY`)) {
+        message.react('👍');
+        message.react('👎');
+    }
+})
+client.on('message', message => {
+    if (message.content.startsWith(`${prefix} Skyblock`)) {
+        const embed = new RichEmbed()
+        .setAuthor('- New Skyblock Updates -')
+        .setTitle('+ Added | - Removed | / Working on')
+        .setColor(0x008080)
+        .setDescription('**Description**')
+
+        message.channel.send({embed});
+    }
+});
+client.login('*Token*')
