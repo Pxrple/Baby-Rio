@@ -232,3 +232,4 @@ client.on('message', message => {
     }
  });
 client.login(config.token)
+# I used to the bot token here but I decided to actually get rid of it lmao
