@@ -1,9 +1,9 @@
 const Discord = require('discord.js');
-const { prefix, token } = require('./config.json');
+const config = require('./config.json')
+const { prefix } = require('./config.json');
 const client = new Discord.Client();
-const { Client, RichEmbed } = require('discord.js');
+const { RichEmbed } = require('discord.js');
 
-process.setMaxListeners(100)
 
 client.on('ready', () => {
     console.log(`BabyRio Loaded! Playing In ${client.guilds.size} Servers`)
@@ -13,7 +13,7 @@ const presence_list = [
     "with Discord 💕", 
     "on BabyOri's Phone 💕",
     "Fighting BabyOri 😡",
-    "Creative on Goli 💕"
+    "Skyblock on Goli 💕"
     ];
 
 client.on('ready', () => {
@@ -41,11 +41,6 @@ client.on('message', message => {
     }
 });
 client.on('message', message => {
-    if (message.content === 'Rio') {
-        message.channel.send(`BabyRio is working in ${client.guilds.size} servers!`)
-    }   
-});
-client.on('message', message => {
     if (message.content.startsWith(`${prefix} ping`)) {
         message.channel.send('Pong.');
     } else if (message.content.startsWith(`${prefix} beep`)) {
@@ -69,8 +64,17 @@ client.on('message', message => {
     } else if (message.content.includes('#github')) {
         message.channel.send('Here you go :) https://github.com/Oribuin/')
     } else if (message.content.includes('#discord')) {
-        message.channel.send('Discord Invite: https://discord.gg/c5JgrnA')
-	}
+        message.channel.send('Discord Invite: https://discord.gg/c5JgrnA');
+	} else if (message.content.startsWith(`${prefix} go commit die`)) {
+        message.channel.send('<a:kms:586611139761275047>');
+    } else if(message.author.id === '345406020450779149') {
+        if (message.content.startsWith('<:PanLove:413844320500580362>'))
+        message.channel.send('<:Pan_Love:586613821418897408>')
+    } else if (message.content.startsWith(`${prefix} flip`)) {
+        message.channel.send('coming soon :wink:');
+    } else if (message.content.startsWith(`${prefix} wheel`)) {
+        message.channel.send(':cartwheel:');
+    }
 });
 client.on('message', message => {
     if (message.content === 'RioWelcome') {
@@ -93,9 +97,9 @@ client.on('message', message => {
 });//Announcements
 client.on('message', message => {
     if (message.content === 'RioAnnouncementф') {
-        message.channel.send('Hey Everyone! <:Bri_Wave:579035075102900229> [@everyone]\n \nWe are introducing two new features to the server <:Bri_Hyped:582685037833617419>\n\n 1: **Monthly Crates**\n*As Ori pinged on Thursday, We are releasing the Monthly Crates today! You will have 30 days to gain one but you can only get one once! They are available now on golinetwork.online* :wink:\n \n2: **Invite Rewards**\n \n*By the end of the month we are going to have a store voucher where the person who has the most discord invites can get a $15 voucher on the store* :wink:\n Type ``#leaderboard`` to view the amount of invites you have!\n \n~~pls invite people | we desperate~~ :(');
+        message.channel.send('Hey Everyone! <:Bri_Wave:579035075102900229>');
     }
-});//Welcome Message 2 | Working on 
+});//Welcome Message 2 | 
 client.on('guildMemberAdd', member => {
     const channel = member.guild.channels.find(ch => ch.name === '👋new-players');
     const embed = new RichEmbed()
@@ -141,7 +145,7 @@ client.on('message', message => {
 
     message.channel.send({embed});
     }
-});
+});//Help Shit
 client.on('message', message => {
     if (message.content === 'Rio Help') {
         const embed = new RichEmbed()
@@ -160,10 +164,7 @@ client.on('message', message => {
 
     message.channel.send({embed});
 
-    }
-});//None Goli Help
-client.on('message', mesage => {
-    if (mesage.content === 'Rio') {
+    } else if (message.content === 'Rio') {
         const embed = new RichEmbed()
         .setTitle('GitHub Commands & Features')
         .setAuthor('Baby Bots\'s Commands', 'https://cdn.discordapp.com/attachments/353475877872599040/580064152001708052/image0.jpg')
@@ -175,7 +176,7 @@ client.on('message', mesage => {
         .setColor(0x008080)
         .setImage('https://cdn.discordapp.com/attachments/570699291585151017/582409246382227476/smile-shadow.png')
 
-        mesage.channel.send({embed});
+        message.channel.send({embed});
     }
 });
 client.on('message', message => {
@@ -187,7 +188,7 @@ client.on('message', message => {
         
         message.channel.send({embed});
     }
-});
+});//SpareShit
 client.on('message', message => {
     if (message.content.startsWith(`!s`)) {
         const embed = new RichEmbed()
@@ -205,10 +206,7 @@ client.on('message', message => {
     } else if (message.content.includes(`NEW SUGGESTION BY`)) {
         message.react('👍');
         message.react('👎');
-    }
-})
-client.on('message', message => {
-    if (message.content.startsWith(`${prefix} Skyblock`)) {
+    } else if (message.content.startsWith(`${prefix} Skyblock`)) {
         const embed = new RichEmbed()
         .setAuthor('- New Skyblock Updates -')
         .setTitle('+ Added | - Removed | / Working on')
@@ -216,6 +214,21 @@ client.on('message', message => {
         .setDescription('**Description**')
 
         message.channel.send({embed});
+    } else if (message.content.startsWith(`!br`)) {
+        const embed = new RichEmbed()
+        .setAuthor('New Bug Report')
+        .setTitle('BUG REPORT INCOMING')
+        .setColor(0xF08080)
+        .setDescription('New BUG REPORT - \n ``!br <bug>``')
+        .setThumbnail(`${message.author.displayAvatarURL}`)
+        .addBlankField(true)
+        .addField(`**Bug Report**`,
+        `${message.author.lastMessage}`)
+        .addField(`*Bug Report By*:`,
+         `**Coming Soon**`)
+
+        message.guild.owner.send({embed});
+
     }
-});
-client.login('*Token*')
+ });
+client.login(config.token)
