@@ -6,7 +6,7 @@ const { RichEmbed } = require('discord.js');
 
 
 client.on('ready', () => {
-    console.log(`BabyRio Loaded! Playing In ${client.guilds.size} Servers`)
+    console.log(`=======================\nBot Loaded: BabyRio\nServers in: ${client.guilds.size}\n=======================`)
 });
 const presence_list = [
     "with BabyOri 💕", 
@@ -237,7 +237,7 @@ client.on('message', message => {
 
         message.guild.owner.send({embed});
         message.delete()
-        message.author.send(`Hey ${message.author.tag}, Thank you for reporting the bug! It has been sent directly to Oribuin!`)
+        message.author.send(`Hey @${message.author.tag}, Thank you for reporting the bug! It has been sent directly to Oribuin!`)
 
     }
 });
@@ -289,4 +289,4 @@ client.on('message', message => {
       }
     }
   });
-client.login(config.token) 
+client.login(config.token)
