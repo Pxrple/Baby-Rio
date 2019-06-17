@@ -1,5 +1,5 @@
 const Discord = require('discord.js');
-const config = require('./config.json')
+const config = require('./config.json');
 const { prefix } = require('./config.json');
 const client = new Discord.Client();
 const { RichEmbed } = require('discord.js');
@@ -11,9 +11,10 @@ client.on('ready', () => {
 const presence_list = [
     "with BabyOri 💕", 
     "with Discord 💕", 
-    "on BabyOri's Phone 💕",
+    "on My phone 💕",
     "Fighting BabyOri 😡",
-    "Skyblock on Goli 💕"
+    "Skyblock on Goli 💕",
+    "Discord.js 💕",
     ];
 
 client.on('ready', () => {
@@ -25,7 +26,7 @@ client.on('ready', () => {
 const message_list = [
     "I don't know you....",
     "Are you a man or a woman?",
-    "Sorry, Baby Rio Cant answer the call right now, Why? Because he doesn't have a phone! :rage:",
+    "Sorry, Baby Rio Cant answer the call right now, Why? Because im trying to sleep! :rage:",
     "What?",
     "How many people does it take to make a singular earth?",
     "Don't hit me! :sob:",
@@ -48,7 +49,7 @@ client.on('message', message => {
     } else if (message.content.startsWith(`${prefix} Friends?`)) {
         message.channel.send('Sure! ');
     } else if (message.content.startsWith(`${prefix} How are you?`)) {
-        message.reply('Considering you\'re speaking to me, Shit honestly');
+        message.reply('I am good!');
     } else if (message.content.startsWith(`${prefix} Who do you love?`)) {
         message.reply('Oribuin & Baby Ori!');
     } else if (message.content.startsWith(`${prefix} Who are your friends?`)) {
@@ -70,6 +71,12 @@ client.on('message', message => {
     } else if(message.author.id === '345406020450779149') {
         if (message.content.startsWith('<:PanLove:413844320500580362>'))
         message.channel.send('<:Pan_Love:586613821418897408>')
+    } else if (message.author.id === '345406020450779149') {
+        if (message.content.startsWith('Oi'))
+        message.channel.send('<:PanPolice:589141466727841793>')
+    } else if (message.author.id === '345406020450779149') {
+        if (message.content.includes('wot'))
+        message.channel.send('<:PanWot:589141480501805240>')
     } else if (message.content.startsWith(`${prefix} flip`)) {
         message.channel.send('coming soon :wink:');
     } else if (message.content.startsWith(`${prefix} wheel`)) {
@@ -96,7 +103,8 @@ client.on('message', message => {
     }
 });//Announcements
 client.on('message', message => {
-    if (message.content === 'RioAnnouncementф') {
+    if(message.author.id === '345406020450779149') {
+    if (message.content === 'RioAnnouncement')
         message.channel.send('Hey Everyone! <:Bri_Wave:579035075102900229>');
     }
 });//Welcome Message 2 | 
@@ -190,7 +198,7 @@ client.on('message', message => {
     }
 });//SpareShit
 client.on('message', message => {
-    if (message.content.startsWith(`!s`)) {
+    if (message.content.startsWith(`!su`)) {
         const embed = new RichEmbed()
         .setAuthor('New Suggestion')
         .setTitle('Upvote | Downvote')
@@ -225,11 +233,60 @@ client.on('message', message => {
         .addField(`**Bug Report**`,
         `${message.author.lastMessage}`)
         .addField(`*Bug Report By*:`,
-         `**Coming Soon**`)
+         `${message.author.tag}`)
 
         message.guild.owner.send({embed});
+        message.delete()
+        message.author.send(`Hey ${message.author.tag}, Thank you for reporting the bug! It has been sent directly to Oribuin!`)
 
     }
- });
-client.login(config.token)
-// I used to the bot token here but I decided to actually get rid of it lmao
+});
+client.on('message', message => {
+    if (!message.guild) return;
+  
+    if(message.author.id === '345406020450779149')
+    if (message.content.startsWith('RioBanф')) {
+      const user = message.mentions.users.first();
+      if (user) {
+        const member = message.guild.member(user);
+        if (member) {
+          member.ban({
+            reason: 'They were bad!',
+          }).then(() => {
+            message.reply(`Successfully banned ${user.tag}`);
+          }).catch(err => {
+            message.reply('I was unable to ban the member, Run Robin');
+            console.error(err);
+          });
+        } else {
+          message.reply('That user isn\'t in this guild!');
+        }
+      } else {
+        message.reply('You didn\'t mention the user to ban!');
+      }
+    }
+    if (!message.guild) return;
+  
+    if(message.author.id === '345406020450779149')
+    if (message.content.startsWith('RioKickф')) {
+      const user = message.mentions.users.first();
+      if (user) {
+        const member = message.guild.member(user);
+        if (member) {
+          member.kick({
+            reason: 'They were a cunt ;3',
+          }).then(() => {
+            message.reply(`Successfully kicked ${user.tag}`);
+          }).catch(err => {
+            message.reply('I was unable to kick the member, Run Robin');
+            console.error(err);
+          });
+        } else {
+          message.reply('That user isn\'t in this guild!');
+        }
+      } else {
+        message.reply('You didn\'t mention the user to kick!');
+      }
+    }
+  });
+client.login(config.token) 
