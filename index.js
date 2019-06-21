@@ -15,6 +15,12 @@ const presence_list = [
     "Fighting BabyOri 😡",
     "Skyblock on Goli 💕",
     "Discord.js 💕",
+    "Netflix 💕",
+    "on golinetwork.online",
+    "Jessica Jones on Loop...",
+    "League of Legends 💕",
+    "Megan Thee Estallion 💕",
+    "Tiara Whack 💕"
     ];
 
 client.on('ready', () => {
@@ -42,43 +48,27 @@ client.on('message', message => {
     }
 });
 client.on('message', message => {
-    if (message.content.startsWith(`${prefix} ping`)) {
-        message.channel.send('Pong.');
-    } else if (message.content.startsWith(`${prefix} beep`)) {
-        message.channel.send('Boop.');
-    } else if (message.content.startsWith(`${prefix} Friends?`)) {
+     if (message.content.startsWith(`${prefix} friends?`)) {
         message.channel.send('Sure! ');
-    } else if (message.content.startsWith(`${prefix} How are you?`)) {
+    } else if (message.content.startsWith(`${prefix} how are you?`)) {
         message.reply('I am good!');
-    } else if (message.content.startsWith(`${prefix} Who do you love?`)) {
-        message.reply('Oribuin & Baby Ori!');
-    } else if (message.content.startsWith(`${prefix} Who are your friends?`)) {
-        message.reply('My Brother Baby Ori!');
-    } else if (message.content.startsWith(`${prefix} What is the meaning of`)) {
+    } else if (message.content.startsWith(`${prefix} who do you love`)) {
+        message.reply('My Family! <:PanLove:413844320500580362>');
+    } else if (message.content.startsWith(`${prefix} what is the meaning of`)) {
         message.reply('How the fuck am I supposed to know?');
-    } else if (message.content.startsWith(`Are we good ${prefix}`)) {
+    } else if (message.content.startsWith(`are we good ${prefix}`)) {
         message.reply('Yeah, I just felt a bit sick :nauseated_face:');
-    } else if (message.content.startsWith(`What do you think ${prefix}`)) {
-        message.reply('<:thonk:554462737166499840>');
-    } else if (message.content.startsWith(`Sell wand`)) {
-        message.reply('No Sell Wands!');
     } else if (message.content.includes('#github')) {
         message.channel.send('Here you go :) https://github.com/Oribuin/')
     } else if (message.content.includes('#discord')) {
-        message.channel.send('Discord Invite: https://discord.gg/c5JgrnA');
-	} else if (message.content.startsWith(`${prefix} go commit die`)) {
-        message.channel.send('<a:kms:586611139761275047>');
+        message.channel.send('Discord Invite: /discord');
+    } else if (message.content.includes('#link')) {
+        message.channel.send('Link your account to Goli Network Discord w/ /discord link')
+    } else if (message.content.includes('#apply')) {
+        message.channel.send('http://bit.ly/GoliApps')
     } else if(message.author.id === '345406020450779149') {
         if (message.content.startsWith('<:PanLove:413844320500580362>'))
         message.channel.send('<:Pan_Love:586613821418897408>')
-    } else if (message.author.id === '345406020450779149') {
-        if (message.content.startsWith('Oi'))
-        message.channel.send('<:PanPolice:589141466727841793>')
-    } else if (message.author.id === '345406020450779149') {
-        if (message.content.includes('wot'))
-        message.channel.send('<:PanWot:589141480501805240>')
-    } else if (message.content.startsWith(`${prefix} flip`)) {
-        message.channel.send('coming soon :wink:');
     } else if (message.content.startsWith(`${prefix} wheel`)) {
         message.channel.send(':cartwheel:');
     }
@@ -127,6 +117,7 @@ client.on('guildMemberAdd', member => {
 
     if (!channel) return;
     channel.send({embed});
+    console.log()
 });
 client.on('guildMemberRemove', member => {
     const channel = member.guild.channels.find(ch => ch.name === 'leaves');
@@ -171,6 +162,7 @@ client.on('message', message => {
     .setColor(0x008080);
 
     message.channel.send({embed});
+    console.log()
 
     } else if (message.content === 'Rio') {
         const embed = new RichEmbed()
@@ -182,9 +174,9 @@ client.on('message', message => {
         .setURL("https://github.com/Oribuin/")
         .addField("Want to invite BabyRio?", "[Invite BabyRio](https://discordapp.com/oauth2/authorize?client_id=581203970203189269&permissions=53861440&scope=bot)")
         .setColor(0x008080)
-        .setImage('https://cdn.discordapp.com/attachments/570699291585151017/582409246382227476/smile-shadow.png')
 
         message.channel.send({embed});
+        console.log()
     }
 });
 client.on('message', message => {
@@ -203,15 +195,20 @@ client.on('message', message => {
         .setAuthor('New Suggestion')
         .setTitle('Upvote | Downvote')
         .setColor(0x008080)
-        .setDescription('Suggest Features to our server with:\n ``!s <suggestion>``')
+        .setDescription('Suggest Features to our server with:\n ``!su <suggestion>``')
         .setThumbnail(`${message.author.displayAvatarURL}`)
         .addBlankField(true)
         .addField('**Suggestion:**',
         `${message.author.lastMessage}`)
+        .addField('Suggestion by:',
+        `${message.author.tag}`)
 
+        message.channel.send(`Do you support this suggestion?`)
         message.channel.send({embed})
-        message.channel.send(`NEW SUGGESTION BY ${message.author}`)
-    } else if (message.content.includes(`NEW SUGGESTION BY`)) {
+        message.delete()
+
+        console.log()
+    } else if (message.content.includes(`Do you support this suggestion?`)) {
         message.react('👍');
         message.react('👎');
     } else if (message.content.startsWith(`${prefix} Skyblock`)) {
@@ -222,6 +219,7 @@ client.on('message', message => {
         .setDescription('**Description**')
 
         message.channel.send({embed});
+        console.log()
     } else if (message.content.startsWith(`!br`)) {
         const embed = new RichEmbed()
         .setAuthor('New Bug Report')
@@ -238,6 +236,7 @@ client.on('message', message => {
         message.guild.owner.send({embed});
         message.delete()
         message.author.send(`Hey @${message.author.tag}, Thank you for reporting the bug! It has been sent directly to Oribuin!`)
+        console.log()
 
     }
 });
@@ -254,6 +253,7 @@ client.on('message', message => {
             reason: 'They were bad!',
           }).then(() => {
             message.reply(`Successfully banned ${user.tag}`);
+            console.log()
           }).catch(err => {
             message.reply('I was unable to ban the member, Run Robin');
             console.error(err);
@@ -277,6 +277,7 @@ client.on('message', message => {
             reason: 'They were a cunt ;3',
           }).then(() => {
             message.reply(`Successfully kicked ${user.tag}`);
+            console.log()
           }).catch(err => {
             message.reply('I was unable to kick the member, Run Robin');
             console.error(err);
@@ -289,4 +290,23 @@ client.on('message', message => {
       }
     }
   });
+client.on('message', message => {
+  if (message.content.startsWith('<@581203970203189269> love me')) {
+    message.reply(`I love you :heart: <:Pan_Love:586613821418897408>`);
+  } else if (message.content.startsWith('<@581203970203189269> hug')) {
+    message.channel.send('<:RioHug:591102792207433729>')
+  }
+});  //Temporary thing
+//client.on('message', message => {
+//   if (message.content.startsWith(`SuggestFormat`)) {
+//    const embed = new RichEmbed()
+//    .setAuthor('-=[Suggest Features Information]=-')
+//    .setTitle('Suggest Features')
+//    .setDescription('How to make a new Suggestion:\n \nType **!su <suggestion>** to make a suggestion, These will be put to poll in the channel for the server to vote.\n \nSpamming this feature will result in privilage to make suggestions revoked\nDo __NOT__ use this channel for anything other than Suggestions, Only type the command in here. Discuss the suggestion in<#546847417782370304>\n \n__Only type Suggestions in <#574366597515444244>__')
+//    .setImage('https://cdn.discordapp.com/attachments/568862020594565130/580826398193614858/GoliLogo.png')
+//    .setURL('https://github.com/Oribuin/')
+//
+//    message.channel.send({embed});
+//   }
+//});
 client.login(config.token)
