@@ -1,13 +1,21 @@
+////////////////////////////////////////////////////////////////
+//Const                                                      //
+//////////////////////////////////////////////////////////////
 const Discord = require('discord.js');
 const config = require('./config.json');
 const { prefix } = require('./config.json');
 const client = new Discord.Client();
 const { RichEmbed } = require('discord.js');
 
-
+////////////////////////////////////////////////////////////////
+//Console Logs                                               //
+//////////////////////////////////////////////////////////////
 client.on('ready', () => {
     console.log(`=======================\nBot Loaded: BabyRio\nServers in: ${client.guilds.size}\n=======================`)
 });
+////////////////////////////////////////////////////////////////
+//Discord Rich Presence                                      //
+//////////////////////////////////////////////////////////////
 const presence_list = [
     "with BabyOri 💕", 
     "with Discord 💕", 
@@ -29,6 +37,9 @@ client.on('ready', () => {
         client.user.setActivity(presence_list[index]);
     }, 20000);
 });
+////////////////////////////////////////////////////////////////
+//@BabyRio Shit                                              //
+//////////////////////////////////////////////////////////////
 const message_list = [
     "I don't know you....",
     "Are you a man or a woman?",
@@ -47,6 +58,9 @@ client.on('message', message => {
         message.channel.send(message_list[index]);
     }
 });
+////////////////////////////////////////////////////////////////
+//Random Text                                                //
+//////////////////////////////////////////////////////////////
 client.on('message', message => {
      if (message.content.startsWith(`${prefix} friends?`)) {
         message.channel.send('Sure! ');
@@ -73,6 +87,9 @@ client.on('message', message => {
         message.channel.send(':cartwheel:');
     }
 });
+////////////////////////////////////////////////////////////////
+//Rio Welcome message                                        //
+//////////////////////////////////////////////////////////////
 client.on('message', message => {
     if (message.content === 'RioWelcome') {
         const embed = new RichEmbed()
@@ -91,23 +108,29 @@ client.on('message', message => {
        
         message.channel.send({embed});
     }
-});//Announcements
+});
+////////////////////////////////////////////////////////////////
+//Announcements                                              //
+//////////////////////////////////////////////////////////////
 client.on('message', message => {
     if(message.author.id === '345406020450779149') {
     if (message.content === 'RioAnnouncement')
         message.channel.send('Hey Everyone! <:Bri_Wave:579035075102900229>');
     }
-});//Welcome Message 2 | 
+});
+////////////////////////////////////////////////////////////////
+//Welcome Message                                            //
+//////////////////////////////////////////////////////////////
 client.on('guildMemberAdd', member => {
     const channel = member.guild.channels.find(ch => ch.name === '👋new-players');
     const embed = new RichEmbed()
     .setAuthor("Goli Network\'s Official Discord!")
-    .setTitle(`Welcome to Goli Network ${member.displayName}`)
+    .setTitle(`Welcome to Goli Network, ${member.displayName}`)
     .setColor(0xF08080)
     .setDescription(`Welcome to the Goli Network Discord! Be sure to read all of our discord server rules in <#546873908687667200>!\n \nCheck our <#546873898059300867> channel for all of the new updates! Enjoy & Have fun!\nDon't forget to link your account!`)
     .setURL("http://golimc.craftingstore.net")
     .setImage("https://cdn.discordapp.com/attachments/568862020594565130/580826398193614858/GoliLogo.png")
-    .setFooter("Type /discord link on golinetwork.online Hub & follow the instructions to link your account!")
+    .setFooter("Type /discord link on golinetwork.online & follow the instructions to link your account!")
     .addBlankField(true)
     .setThumbnail(`${member.user.avatarURL}`)
     .addField("Join our Minecraft Server!",
@@ -119,11 +142,17 @@ client.on('guildMemberAdd', member => {
     channel.send({embed});
     console.log()
 });
+////////////////////////////////////////////////////////////////
+//Member Leave                                               //
+//////////////////////////////////////////////////////////////
 client.on('guildMemberRemove', member => {
     const channel = member.guild.channels.find(ch => ch.name === 'leaves');
     if (!channel) return;
     channel.send(`${member.displayName} Just left the server...`)
-})
+});
+////////////////////////////////////////////////////////////////
+//Advertisement                                              //
+//////////////////////////////////////////////////////////////
 client.on('message', message => {
     if (message.content === 'RioAdvert') {
         const embed = new RichEmbed()
@@ -144,7 +173,10 @@ client.on('message', message => {
 
     message.channel.send({embed});
     }
-});//Help Shit
+});
+////////////////////////////////////////////////////////////////
+//Help Commands                                              //
+//////////////////////////////////////////////////////////////
 client.on('message', message => {
     if (message.content === 'Rio Help') {
         const embed = new RichEmbed()
@@ -179,6 +211,9 @@ client.on('message', message => {
         console.log()
     }
 });
+////////////////////////////////////////////////////////////////
+//Favorite Color Shit                                        //
+//////////////////////////////////////////////////////////////
 client.on('message', message => {
     if (message.content.startsWith(`${prefix} Favorite Color`)) {
         const embed = new RichEmbed()
@@ -188,9 +223,12 @@ client.on('message', message => {
         
         message.channel.send({embed});
     }
-});//SpareShit
+});
+////////////////////////////////////////////////////////////////
+// SUGGESTIONS, BUG REPORTS & SERVER UPDATES                 //
+//////////////////////////////////////////////////////////////
 client.on('message', message => {
-    if (message.content.startsWith(`!su`)) {
+    if (message.content.startsWith(`!su`)) {// 👍 👎
         const embed = new RichEmbed()
         .setAuthor('New Suggestion')
         .setTitle('Upvote | Downvote')
@@ -203,14 +241,14 @@ client.on('message', message => {
         .addField('Suggestion by:',
         `${message.author.tag}`)
 
-        message.channel.send(`Do you support this suggestion?`)
         message.channel.send({embed})
         message.delete()
-
-        console.log()
-    } else if (message.content.includes(`Do you support this suggestion?`)) {
-        message.react('👍');
-        message.react('👎');
+      setTimeout(function() {
+        message.channel.send('Vote if you think this message should be added');
+      }, 1000);
+    } else if (message.content.startsWith('Vote if you think this message should be added')) {
+      message.react('👍')
+      message.react('👎')
     } else if (message.content.startsWith(`${prefix} Skyblock`)) {
         const embed = new RichEmbed()
         .setAuthor('- New Skyblock Updates -')
@@ -219,7 +257,6 @@ client.on('message', message => {
         .setDescription('**Description**')
 
         message.channel.send({embed});
-        console.log()
     } else if (message.content.startsWith(`!br`)) {
         const embed = new RichEmbed()
         .setAuthor('New Bug Report')
@@ -240,6 +277,9 @@ client.on('message', message => {
 
     }
 });
+////////////////////////////////////////////////////////////////
+//Ban / Kick Player                                          //
+//////////////////////////////////////////////////////////////
 client.on('message', message => {
     if (!message.guild) return;
   
@@ -290,13 +330,19 @@ client.on('message', message => {
       }
     }
   });
+////////////////////////////////////////////////////////////////
+//Random Text 2                                              //
+//////////////////////////////////////////////////////////////
 client.on('message', message => {
   if (message.content.startsWith('<@581203970203189269> love me')) {
     message.reply(`I love you :heart: <:Pan_Love:586613821418897408>`);
   } else if (message.content.startsWith('<@581203970203189269> hug')) {
     message.channel.send('<:RioHug:591102792207433729>')
   }
-});  //Temporary thing
+});
+////////////////////////////////////////////////////////////////
+//Temporary Code                                             //
+//////////////////////////////////////////////////////////////
 //client.on('message', message => {
 //   if (message.content.startsWith(`SuggestFormat`)) {
 //    const embed = new RichEmbed()
