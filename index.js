@@ -11,7 +11,7 @@ const { RichEmbed } = require('discord.js');
 //Console Logs                                               //
 //////////////////////////////////////////////////////////////
 client.on('ready', () => {
-    console.log(`=======================\nBot Loaded: BabyRio\nServers in: ${client.guilds.size}\n=======================`)
+    console.log(`================\nBot Loaded: ${client.user.tag}\nBot Author: Ori#0004\nBot Version: 1.18\nServers: ${client.guilds.size}\n================`)
 });
 ////////////////////////////////////////////////////////////////
 //Discord Rich Presence                                      //
@@ -153,27 +153,27 @@ client.on('guildMemberRemove', member => {
 ////////////////////////////////////////////////////////////////
 //Advertisement                                              //
 //////////////////////////////////////////////////////////////
-client.on('message', message => {
-    if (message.content === 'RioAdvert') {
-        const embed = new RichEmbed()
-        .setTitle('BabyRio Bot by Oribuin')
-        .setURL('https://github.com/Oribuin/')
-        .setAuthor('Goli Network - MC Server - 1.8-1.14')
-        .setDescription('__What is Goli Network?__ \n**Goli Network is a custom made minecraft server with new features added everyday! We use a number of premium plugins & custom codes to make the experience amazing for __everyone__!**')
-        .addBlankField(true)
-        .addField("**We currently have Skyblock released aswell as Factions & KitPvP being in the works and getting released very soon so keep an eye out for any of our server updates!**", "[Store](http://golimc.craftingstore.net/)")
-        .addField("Take a look at BabyOri & BabyRio's Github to know all the Commands available with this bot.", "[GitHub](https://github.com/Oribuin/)", true)
-        .addBlankField(true)
-        .setImage("https://cdn.discordapp.com/attachments/568862020594565130/580826398193614858/GoliLogo.png")
-        .addField("Join our Minecraft Server!",
-        ">> golinetwork.online <<")
-      .addField("Want to invite your friends to this server?", "[Discord Invite](https://discord.gg/c5JgrnA)", true)
-      .addField("Check for our server updates on our twitter!", "[Twitter](https://twitter.com/GoliNetwork)", true)
-      .setColor(0xF08080)
-
-    message.channel.send({embed});
-    }
-});
+//client.on('message', message => {
+//    if (message.content === 'RioAdvert') {
+//        const embed = new RichEmbed()
+//        .setTitle('BabyRio Bot by Oribuin')
+//        .setURL('https://github.com/Oribuin/')
+//        .setAuthor('Goli Network - MC Server - 1.8-1.14')
+//        .setDescription('__What is Goli Network?__ \n**Goli Network is a custom made minecraft server with new features added everyday! We use a number of premium plugins & custom codes to make the experience amazing for __everyone__!**')
+//        .addBlankField(true)
+//        .addField("**We currently have Skyblock released aswell as Factions & KitPvP being in the works and getting released very soon so keep an eye out for any of our server updates!**", "[Store](http://golimc.craftingstore.net/)")
+//        .addField("Take a look at BabyOri & BabyRio's Github to know all the Commands available with this bot.", "[GitHub](https://github.com/Oribuin/)", true)
+//        .addBlankField(true)
+//        .setImage("https://cdn.discordapp.com/attachments/568862020594565130/580826398193614858/GoliLogo.png")
+//        .addField("Join our Minecraft Server!",
+//        ">> golinetwork.online <<")
+//      .addField("Want to invite your friends to this server?", "[Discord Invite](https://discord.gg/c5JgrnA)", true)
+//      .addField("Check for our server updates on our twitter!", "[Twitter](https://twitter.com/GoliNetwork)", true)
+//      .setColor(0xF08080)
+//
+//    message.channel.send({embed});
+//    }
+//});
 ////////////////////////////////////////////////////////////////
 //Help Commands                                              //
 //////////////////////////////////////////////////////////////
@@ -244,7 +244,7 @@ client.on('message', message => {
         message.channel.send({embed})
         message.delete()
       setTimeout(function() {
-        message.channel.send('Vote if you think this message should be added');
+        message.channel.send('Vote if you think this suggestion should be added');
       }, 1000);
     } else if (message.content.startsWith('Vote if you think this message should be added')) {
       message.react('👍')
@@ -338,6 +338,10 @@ client.on('message', message => {
     message.reply(`I love you :heart: <:Pan_Love:586613821418897408>`);
   } else if (message.content.startsWith('<@581203970203189269> hug')) {
     message.channel.send('<:RioHug:591102792207433729>')
+  } else if (message.content.startsWith(`${prefix} Avatar`)) {
+    message.channel.send(`${message.author.avatarURL}`)
+  } else if (message.content.startsWith(`${prefix} Uptime`)) {
+    message.channel.send(`${client.uptime}`)
   }
 });
 ////////////////////////////////////////////////////////////////
