@@ -11,7 +11,7 @@ const { RichEmbed } = require('discord.js');
 //Console Logs                                               //
 //////////////////////////////////////////////////////////////
 client.on('ready', () => {
-    console.log(`================\nBot Loaded: ${client.user.tag}\nBot Author: Ori#0004\nBot Version: 1.27\nServers: ${client.guilds.size}\n================`)
+    console.log(`================\nBot Loaded: ${client.user.tag}\nBot Author: Ori#0004\nBot Version: 1.31\nServers: ${client.guilds.size}\nUsers Using Bot: ${client.users.size}\nLibrary: Discord.js\n================`)
 });
 ////////////////////////////////////////////////////////////////
 //Discord Rich Presence                                      //
@@ -142,7 +142,7 @@ client.on('guildMemberAdd', member => {
 
     if (!channel) return;
     channel.send({embed});
-    console.log()
+    console.log(`${member.displayName} Joined Goli Network`)
 });
 ////////////////////////////////////////////////////////////////
 //Member Leave                                               //
@@ -200,14 +200,23 @@ client.on('message', message => {
 
     } else if (message.content === 'Rio') {
         const embed = new RichEmbed()
-        .setTitle('GitHub Commands & Features')
-        .setAuthor('Baby Bots\'s Commands', 'https://cdn.discordapp.com/attachments/353475877872599040/580064152001708052/image0.jpg')
-        .setDescription("There isnt really many commands that you could do with BabyRio that aren't Ori's server related. You can @ BabyRio for a random response & Ask him questions...")
-        .addField("[BabyOri README.md Page]", "[>>Click Me<<](https://github.com/Oribuin/BabyOri/blob/master/README.md)", true)
-        .addField("[BabyRio README.md Page]", "[>>Click Me<<](https://github.com/Oribuin/Baby-Rio/blob/master/README.md)", true)
-        .setURL("https://github.com/Oribuin/")
-        .addField("Want to invite BabyRio?", "[Invite BabyRio](https://discordapp.com/oauth2/authorize?client_id=581203970203189269&permissions=53861440&scope=bot)")
-        .setColor(0x008080)
+        .setTitle('-=[Baby Rio Info]=-')
+        .setAuthor('Baby Rio Info', `${client.user.avatarURL}`)
+        .addField('Rio Version',
+        '1.31')
+        .addField(`Author`,
+        '[Ori#0004](https://github.com/Oribuin/)')
+        .addField(`Library`, 
+        '[discord.js](https://discord.js.org/#/)')
+        .addField('Servers:',
+        `${client.guilds.size}`)
+        .addField('Users using BabyRio',
+        `${client.users.size}`)
+        .setColor(0xF08080)
+        .setThumbnail(`${message.author.avatarURL}`)
+        .setFooter(`Requested by: ${message.author.tag}`)
+        .setImage("https://cdn.discordapp.com/attachments/568862020594565130/580826398193614858/GoliLogo.png")
+        .setTimestamp()
 
         message.channel.send({embed});
         console.log()
@@ -230,7 +239,9 @@ client.on('message', message => {
 // SUGGESTIONS, BUG REPORTS & SERVER UPDATES                 //
 //////////////////////////////////////////////////////////////
 client.on('message', message => {
+  if (!message.guild) return;
     if (message.content.startsWith(`!su`)) {// 👍 👎
+      const channel = message.guild.channels.find(ch => ch.name === '🤔suggestions');
         const embed = new RichEmbed()
         .setAuthor('New Suggestion')
         .setTitle('Upvote | Downvote')
@@ -243,17 +254,12 @@ client.on('message', message => {
         .addField('Suggestion by:',
         `${message.author.tag}`)
 
-        message.channel.send({embed}).then(sentEmbed => {
+        if (!channel) return;
+        channel.send({embed}).then(sentEmbed => {
           sentEmbed.react("👍")
           sentEmbed.react("👎")
           message.delete()
     })
-//      setTimeout(function() {
-//        message.channel.send('Vote if you think this suggestion should be added');
-//      }, 1000);
-//    } else if (message.content.startsWith('Vote if you think this suggestion should be added')) {
-//      message.react('👍')
-//      message.react('👎')
     } else if (message.content.startsWith(`${prefix} Skyblock`)) {
         const embed = new RichEmbed()
         .setAuthor('- New Skyblock Updates -')
@@ -262,7 +268,9 @@ client.on('message', message => {
         .setDescription('**Description**')
 
         message.channel.send({embed});
+        if (!message.guild) return;
     } else if (message.content.startsWith(`!br`)) {
+      const channel = message.guild.channels.find(ch => ch.name === '🐛bugs');
         const embed = new RichEmbed()
         .setAuthor('New Bug Report')
         .setTitle('BUG REPORT INCOMING')
@@ -275,10 +283,10 @@ client.on('message', message => {
         .addField(`*Bug Report By*:`,
          `${message.author.tag}`)
 
-        message.guild.owner.send({embed});
+         if (!channel) return;
+        channel.send({embed});
         message.delete()
-        message.author.send(`Hey @${message.author.tag}, Thank you for reporting the bug! It has been sent directly to Oribuin!`)
-        console.log()
+        message.author.send(`Hey @${message.author.tag}, Thank you for reporting the bug! It has been sent to the developers!`)
 
     }
 });
@@ -339,15 +347,23 @@ client.on('message', message => {
 //Temporary Code                                             //
 //////////////////////////////////////////////////////////////
 //client.on('message', message => {
-//   if (message.content.startsWith(`SuggestFormat`)) {
+//   if (message.content.startsWith(`SugFormat`)) {
 //    const embed = new RichEmbed()
 //    .setAuthor('-=[Suggest Features Information]=-')
 //    .setTitle('Suggest Features')
-//    .setDescription('How to make a new Suggestion:\n \nType **!su <suggestion>** to make a suggestion, These will be put to poll in the channel for the server to vote.\n \nSpamming this feature will result in privilage to make suggestions revoked\nDo __NOT__ use this channel for anything other than Suggestions, Only type the command in here. Discuss the suggestion in<#546847417782370304>\n \n__Only type Suggestions in <#574366597515444244>__')
+//    .setDescription('How to make a new Suggestion:\n \nType **!su <suggestion>** in <#546874704850321409> to make a suggestion, These will be put to poll in the channel for the server to vote.\n \nSpamming this feature will result in privilage to make suggestions revoked\nDo __NOT__ use this channel for anything other than Suggestions, Only type the command in Bot Commands. Discuss the suggestion in <#546847417782370304>\n \n__Only type Suggestions in <#546874704850321409>__')
 //    .setImage('https://cdn.discordapp.com/attachments/568862020594565130/580826398193614858/GoliLogo.png')
 //    .setURL('https://github.com/Oribuin/')
 //
 //    message.channel.send({embed});
+//   } else if (message.content.startsWith(`BrFormat`)) {
+//     const embed = new RichEmbed()
+//     .setAuthor('-=[Bug Report Information]=-')
+//     .setDescription('How to make a bug report:\n \nType !br <bug> in <#546874704850321409> to make your report!\n \n__Only type bug reports in <#546874704850321409>__')
+//     .setImage('https://cdn.discordapp.com/attachments/568862020594565130/580826398193614858/GoliLogo.png')
+//
+//     message.channel.send({embed});
+//     message.delete()
 //   }
 //});
 ////////////////////////////////////////////////////////////////
@@ -383,10 +399,7 @@ client.on('message', message => {
     let minutes = Math.floor(totalSeconds / 60);
     let seconds = totalSeconds % 60;
     let uptime = `${days} days, ${hours} hours, ${minutes} minutes and ${seconds} seconds`;
-    message.channel.send(`${days} days, ${hours} hours, ${minutes} minutes and ${seconds} seconds`)
-  }
-  if (message.content.startsWith(`${prefix} Version`)) {
-    message.channel.send('Bot Version: 1.27')
+    message.channel.send(`${days} days, ${hours} hours, ${minutes} minutes`)
   }
 });
 client.login(config.token)
