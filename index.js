@@ -11,13 +11,13 @@ const { RichEmbed } = require('discord.js');
 //Console Logs                                               //
 //////////////////////////////////////////////////////////////
 client.on('ready', () => {
-    console.log(`================\nBot Loaded: ${client.user.tag}\nBot Author: Ori#0004\nBot Version: 1.18\nServers: ${client.guilds.size}\n================`)
+    console.log(`================\nBot Loaded: ${client.user.tag}\nBot Author: Ori#0004\nBot Version: 1.27\nServers: ${client.guilds.size}\n================`)
 });
 ////////////////////////////////////////////////////////////////
 //Discord Rich Presence                                      //
 //////////////////////////////////////////////////////////////
 const presence_list = [
-    "with BabyOri 💕", 
+    "with Baby Ella 💕", 
     "with Discord 💕", 
     "on My phone 💕",
     "Fighting BabyOri 😡",
@@ -25,7 +25,7 @@ const presence_list = [
     "Discord.js 💕",
     "Netflix 💕",
     "on golinetwork.online",
-    "Jessica Jones on Loop...",
+    "Jessica Jones 💕",
     "League of Legends 💕",
     "Megan Thee Estallion 💕",
     "Tiara Whack 💕"
@@ -62,16 +62,10 @@ client.on('message', message => {
 //Random Text                                                //
 //////////////////////////////////////////////////////////////
 client.on('message', message => {
-     if (message.content.startsWith(`${prefix} friends?`)) {
-        message.channel.send('Sure! ');
-    } else if (message.content.startsWith(`${prefix} how are you?`)) {
+    if (message.content.startsWith(`${prefix} how are you?`)) {
         message.reply('I am good!');
     } else if (message.content.startsWith(`${prefix} who do you love`)) {
         message.reply('My Family! <:PanLove:413844320500580362>');
-    } else if (message.content.startsWith(`${prefix} what is the meaning of`)) {
-        message.reply('How the fuck am I supposed to know?');
-    } else if (message.content.startsWith(`are we good ${prefix}`)) {
-        message.reply('Yeah, I just felt a bit sick :nauseated_face:');
     } else if (message.content.includes('#github')) {
         message.channel.send('Here you go :) https://github.com/Oribuin/')
     } else if (message.content.includes('#discord')) {
@@ -83,8 +77,16 @@ client.on('message', message => {
     } else if(message.author.id === '345406020450779149') {
         if (message.content.startsWith('<:PanLove:413844320500580362>'))
         message.channel.send('<:Pan_Love:586613821418897408>')
-    } else if (message.content.startsWith(`${prefix} wheel`)) {
-        message.channel.send(':cartwheel:');
+    } else if (message.content.startsWith('<@581203970203189269> love me')) {
+      message.reply(`I love you :heart: <:Pan_Love:586613821418897408>`);
+    } else if (message.content.startsWith('<@581203970203189269> hug')) {
+      message.channel.send('<:RioHug:591102792207433729>')
+    } else if (message.content.startsWith(`${prefix} Avatar`)) {
+      message.channel.send(`${message.author.avatarURL}`)
+    } else if(message.author.id === '345406020450779149')
+      if (message.content.startsWith('Oi')) {
+      message.channel.send('<:PanCop:589141466727841793>')
+
     }
 });
 ////////////////////////////////////////////////////////////////
@@ -241,14 +243,17 @@ client.on('message', message => {
         .addField('Suggestion by:',
         `${message.author.tag}`)
 
-        message.channel.send({embed})
-        message.delete()
-      setTimeout(function() {
-        message.channel.send('Vote if you think this suggestion should be added');
-      }, 1000);
-    } else if (message.content.startsWith('Vote if you think this message should be added')) {
-      message.react('👍')
-      message.react('👎')
+        message.channel.send({embed}).then(sentEmbed => {
+          sentEmbed.react("👍")
+          sentEmbed.react("👎")
+          message.delete()
+    })
+//      setTimeout(function() {
+//        message.channel.send('Vote if you think this suggestion should be added');
+//      }, 1000);
+//    } else if (message.content.startsWith('Vote if you think this suggestion should be added')) {
+//      message.react('👍')
+//      message.react('👎')
     } else if (message.content.startsWith(`${prefix} Skyblock`)) {
         const embed = new RichEmbed()
         .setAuthor('- New Skyblock Updates -')
@@ -331,20 +336,6 @@ client.on('message', message => {
     }
   });
 ////////////////////////////////////////////////////////////////
-//Random Text 2                                              //
-//////////////////////////////////////////////////////////////
-client.on('message', message => {
-  if (message.content.startsWith('<@581203970203189269> love me')) {
-    message.reply(`I love you :heart: <:Pan_Love:586613821418897408>`);
-  } else if (message.content.startsWith('<@581203970203189269> hug')) {
-    message.channel.send('<:RioHug:591102792207433729>')
-  } else if (message.content.startsWith(`${prefix} Avatar`)) {
-    message.channel.send(`${message.author.avatarURL}`)
-  } else if (message.content.startsWith(`${prefix} Uptime`)) {
-    message.channel.send(`${client.uptime}`)
-  }
-});
-////////////////////////////////////////////////////////////////
 //Temporary Code                                             //
 //////////////////////////////////////////////////////////////
 //client.on('message', message => {
@@ -359,4 +350,43 @@ client.on('message', message => {
 //    message.channel.send({embed});
 //   }
 //});
+////////////////////////////////////////////////////////////////
+//Client Shit                                                //
+//////////////////////////////////////////////////////////////
+client.on('message', message => {
+  if(message.author.id === '345406020450779149')
+  if (message.content.startsWith(`${prefix} Idle`)) {
+    client.user.setStatus("idle")
+    message.channel.send('Idle Status | Activated')
+    .then(console.log)
+    .catch(console.error)
+  }
+  if(message.author.id === '345406020450779149')
+  if (message.content.startsWith(`${prefix} DND`)) {
+    client.user.setStatus("dnd")
+    message.channel.send('Do Not Disturb Status | Activated')
+    .then(console.log)
+    .catch(console.error)
+  }
+  if(message.author.id === '345406020450779149')
+  if (message.content.startsWith(`${prefix} Online`)) {
+    client.user.setStatus("online")
+    message.channel.send('Online Status | Activated')
+    .then(console.log)
+    .catch(console.error)
+  }
+  if (message.content.startsWith(`${prefix} Uptime`)) {
+    let totalSeconds = (client.uptime / 1000);
+    let days = Math.floor(totalSeconds / 86400);
+    let hours = Math.floor(totalSeconds / 3600);
+    totalSeconds %= 3600;
+    let minutes = Math.floor(totalSeconds / 60);
+    let seconds = totalSeconds % 60;
+    let uptime = `${days} days, ${hours} hours, ${minutes} minutes and ${seconds} seconds`;
+    message.channel.send(`${days} days, ${hours} hours, ${minutes} minutes and ${seconds} seconds`)
+  }
+  if (message.content.startsWith(`${prefix} Version`)) {
+    message.channel.send('Bot Version: 1.27')
+  }
+});
 client.login(config.token)
