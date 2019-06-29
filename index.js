@@ -11,7 +11,7 @@ const { RichEmbed } = require('discord.js');
 //Console Logs                                               //
 //////////////////////////////////////////////////////////////
 client.on('ready', () => {
-    console.log(`================\nBot Loaded: ${client.user.tag}\nBot Author: Ori#0004\nBot Version: 1.31\nServers: ${client.guilds.size}\nUsers Using Bot: ${client.users.size}\nLibrary: Discord.js\n================`)
+    console.log(`==========================\nBot Loaded: ${client.user.tag}\nBot Author: Ori#0004\nBot Version: 1.35\nServers: ${client.guilds.size}\nUsers Using Bot: ${client.users.size}\nLibrary: Discord.js\n==========================`)
 });
 ////////////////////////////////////////////////////////////////
 //Discord Rich Presence                                      //
@@ -86,8 +86,9 @@ client.on('message', message => {
     } else if(message.author.id === '345406020450779149')
       if (message.content.startsWith('Oi')) {
       message.channel.send('<:PanCop:589141466727841793>')
-
-    }
+      } else if(message.content.startsWith(`${prefix} Test`)) {
+        message.channel.send('&6&lTest')
+      }
 });
 ////////////////////////////////////////////////////////////////
 //Rio Welcome message                                        //
@@ -117,7 +118,7 @@ client.on('message', message => {
 client.on('message', message => {
     if(message.author.id === '345406020450779149') {
     if (message.content === 'RioAnnouncement')
-        message.channel.send('Hey Everyone! <:Bri_Wave:579035075102900229>');
+        message.channel.send('Hey Everyone! <:Bri_Wave:579035075102900229>\n \nAfter a long week or two it has finally come around to the time where we open up the server after I worked hard on the server everyday to remake the entire thing! I am incredibly happy to introduce to you Season 2 Of Goli Network Skyblock! <:RioHug:591102792207433729>\n \nAs I said yesterday I haven\'t had as much time to beta test so there will definetly be a few bugs! Report them straight away w/ ``!br <bug>`` in <#577491181697630244>! \n \nThe server is now unwhitelisted & you are able to join, We will list everything that has changed in <#553475680973881345>! Let us know the stuff you want us to add! :wink:\n \nThank you for being so patient with us! <:Pan_Love:586613821418897408> \n[@everyone]');
     }
 });
 ////////////////////////////////////////////////////////////////
@@ -160,11 +161,11 @@ client.on('guildMemberRemove', member => {
 //        const embed = new RichEmbed()
 //        .setTitle('BabyRio Bot by Oribuin')
 //        .setURL('https://github.com/Oribuin/')
-//        .setAuthor('Goli Network - MC Server - 1.8-1.14')
+//        .setAuthor('Goli Network - MC Server - 1.13.2-1.14.2')
 //        .setDescription('__What is Goli Network?__ \n**Goli Network is a custom made minecraft server with new features added everyday! We use a number of premium plugins & custom codes to make the experience amazing for __everyone__!**')
 //        .addBlankField(true)
-//        .addField("**We currently have Skyblock released aswell as Factions & KitPvP being in the works and getting released very soon so keep an eye out for any of our server updates!**", "[Store](http://golimc.craftingstore.net/)")
-//        .addField("Take a look at BabyOri & BabyRio's Github to know all the Commands available with this bot.", "[GitHub](https://github.com/Oribuin/)", true)
+//        .addField("**We currently have Skyblock released and with the help of __Donations__ we can work on releasing Factions! Keep an eye out for any server updates server updates!**", "[Store](http://golimc.craftingstore.net/)")
+//        .addField("Take a look at BabyRio's GitHub to know all the Commands available with this bot.", "[GitHub](https://github.com/Oribuin/)", true)
 //        .addBlankField(true)
 //        .setImage("https://cdn.discordapp.com/attachments/568862020594565130/580826398193614858/GoliLogo.png")
 //        .addField("Join our Minecraft Server!",
@@ -182,11 +183,10 @@ client.on('guildMemberRemove', member => {
 client.on('message', message => {
     if (message.content === 'Rio Help') {
         const embed = new RichEmbed()
-    .setTitle('GitHub Commands & Features')
-    .setAuthor('Baby Bots\'s Commands', 'https://cdn.discordapp.com/attachments/353475877872599040/580064152001708052/image0.jpg')
-    .setDescription('Githubs: Githubs')
-    .addField("[BabyOri README.md Page]", "[>>Click Me<<](https://github.com/Oribuin/BabyOri/blob/master/README.md)", true)
-    .addField("[BabyRio README.md Page]", "[>>Click Me<<](https://github.com/Oribuin/Baby-Rio/blob/master/README.md)", true)
+    .setTitle('Custom Discord bot made for Ori\'s Server!')
+    .setAuthor('Baby Rio by @Ori#0004')
+    .setDescription('__Here are a list of commands you can use__\n```diff\n- Fun Commands -\n+ @Baby Rio (Random message)\n+ Rio how are you?\n+ Rio who do you love?\n+ Rio Favorite Color\n [More Coming Soon]\n- Goli Related -\n+ \'Rio\' Bot Stats\n+ !su <suggestion> Suggest new features\n+ !br <bug> Report Bugs\n+ Rio Skyblock Server Updates\n+ #apply (Applications\n+ #github (Oribuin GitHub)\n```')
+    .addField("[BabyRio GitHub]", "[GitHub Link](https://github.com/Oribuin/Baby-Rio/)", true)
     .addBlankField(true)
     .setImage("https://cdn.discordapp.com/attachments/568862020594565130/580826398193614858/GoliLogo.png")
     .setURL("https://github.com/Oribuin/")
@@ -203,7 +203,7 @@ client.on('message', message => {
         .setTitle('-=[Baby Rio Info]=-')
         .setAuthor('Baby Rio Info', `${client.user.avatarURL}`)
         .addField('Rio Version',
-        '1.31')
+        '1.35')
         .addField(`Author`,
         '[Ori#0004](https://github.com/Oribuin/)')
         .addField(`Library`, 
@@ -262,10 +262,13 @@ client.on('message', message => {
     })
     } else if (message.content.startsWith(`${prefix} Skyblock`)) {
         const embed = new RichEmbed()
-        .setAuthor('- New Skyblock Updates -')
-        .setTitle('+ Added | - Removed | / Working on')
-        .setColor(0x008080)
-        .setDescription('**Description**')
+        .setAuthor('- Season 2 Skyblock Changes -')
+        .setTitle('New Changes & Features')
+        .setColor(0xF08080)
+        .setDescription('```yaml\nThree New Crates\nSome new GUIs\n2 New Islands\nNew rank perks (Being worked on still :D)\nFurnance Updates (these are staying)\nNew Commands w/ @Baby Rio\nSell Wands\nMinions\nNew /color menu\nNew Perks\nNew Spawn\n1.9 Combat in spawn & on islands with 1.8 combat in PvP\nCustom Enchants\nVote Keys\n \n - COMING SOON -\nPets\nParticles\nBosses\nAnchors (Plugin Bugs, nothing i can do about it)\nKOTH\nJuly Monthly crate\nKiller Money\nIsland Challenges\nGenerator Upgrades\n```')
+        .setFooter(`Requested by: ${message.author.tag}`)
+        .setImage("https://cdn.discordapp.com/attachments/568862020594565130/580826398193614858/GoliLogo.png")
+        .setTimestamp()
 
         message.channel.send({embed});
         if (!message.guild) return;
@@ -374,22 +377,16 @@ client.on('message', message => {
   if (message.content.startsWith(`${prefix} Idle`)) {
     client.user.setStatus("idle")
     message.channel.send('Idle Status | Activated')
-    .then(console.log)
-    .catch(console.error)
   }
   if(message.author.id === '345406020450779149')
   if (message.content.startsWith(`${prefix} DND`)) {
     client.user.setStatus("dnd")
     message.channel.send('Do Not Disturb Status | Activated')
-    .then(console.log)
-    .catch(console.error)
   }
   if(message.author.id === '345406020450779149')
   if (message.content.startsWith(`${prefix} Online`)) {
     client.user.setStatus("online")
     message.channel.send('Online Status | Activated')
-    .then(console.log)
-    .catch(console.error)
   }
   if (message.content.startsWith(`${prefix} Uptime`)) {
     let totalSeconds = (client.uptime / 1000);
@@ -402,4 +399,11 @@ client.on('message', message => {
     message.channel.send(`${days} days, ${hours} hours, ${minutes} minutes`)
   }
 });
+client.on('message', message => {
+  if (message.content.includes('#color')) {
+    message.channel.send('&11&22&33&44&55&66&77&88&99&aa&bb&cc&dd&ee&ff');
+  } else if (message.content.includes('#songoda')){
+    message.channel.send('We use: &aEpicBosses, EpicFarming, EpicFurnances, EpicHeads, EpicHoppers, EpicSpawners, UltimateKit, UltimateTimber, UltimateStacker and FabledSkyblock')
+  }
+})
 client.login(config.token)
