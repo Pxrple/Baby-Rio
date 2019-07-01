@@ -11,7 +11,7 @@ const { RichEmbed } = require('discord.js');
 //Console Logs                                               //
 //////////////////////////////////////////////////////////////
 client.on('ready', () => {
-    console.log(`==========================\nBot Loaded: ${client.user.tag}\nBot Author: Ori#0004\nBot Version: 1.35\nServers: ${client.guilds.size}\nUsers Using Bot: ${client.users.size}\nLibrary: Discord.js\n==========================`)
+    console.log(`==========================\nBot Loaded: ${client.user.tag}\nBot Author: Ori#0004\nBot Version: 1.36\nServers: ${client.guilds.size}\nUsers Using Bot: ${client.users.size}\nLibrary: Discord.js\n==========================`)
 });
 ////////////////////////////////////////////////////////////////
 //Discord Rich Presence                                      //
@@ -66,28 +66,16 @@ client.on('message', message => {
         message.reply('I am good!');
     } else if (message.content.startsWith(`${prefix} who do you love`)) {
         message.reply('My Family! <:PanLove:413844320500580362>');
-    } else if (message.content.includes('#github')) {
-        message.channel.send('Here you go :) https://github.com/Oribuin/')
-    } else if (message.content.includes('#discord')) {
-        message.channel.send('Discord Invite: /discord');
-    } else if (message.content.includes('#link')) {
-        message.channel.send('Link your account to Goli Network Discord w/ /discord link')
-    } else if (message.content.includes('#apply')) {
-        message.channel.send('http://bit.ly/GoliApps')
     } else if(message.author.id === '345406020450779149') {
         if (message.content.startsWith('<:PanLove:413844320500580362>'))
         message.channel.send('<:Pan_Love:586613821418897408>')
-    } else if (message.content.startsWith('<@581203970203189269> love me')) {
+    } else if (message.content.startsWith('<@581203970203189269> Love me')) {
       message.reply(`I love you :heart: <:Pan_Love:586613821418897408>`);
     } else if (message.content.startsWith('<@581203970203189269> hug')) {
       message.channel.send('<:RioHug:591102792207433729>')
-    } else if (message.content.startsWith(`${prefix} Avatar`)) {
-      message.channel.send(`${message.author.avatarURL}`)
     } else if(message.author.id === '345406020450779149')
       if (message.content.startsWith('Oi')) {
       message.channel.send('<:PanCop:589141466727841793>')
-      } else if(message.content.startsWith(`${prefix} Test`)) {
-        message.channel.send('&6&lTest')
       }
 });
 ////////////////////////////////////////////////////////////////
@@ -203,7 +191,7 @@ client.on('message', message => {
         .setTitle('-=[Baby Rio Info]=-')
         .setAuthor('Baby Rio Info', `${client.user.avatarURL}`)
         .addField('Rio Version',
-        '1.35')
+        '1.36')
         .addField(`Author`,
         '[Ori#0004](https://github.com/Oribuin/)')
         .addField(`Library`, 
@@ -388,22 +376,44 @@ client.on('message', message => {
     client.user.setStatus("online")
     message.channel.send('Online Status | Activated')
   }
-  if (message.content.startsWith(`${prefix} Uptime`)) {
+  if (message.content.includes(`#uptime`)) {
     let totalSeconds = (client.uptime / 1000);
     let days = Math.floor(totalSeconds / 86400);
     let hours = Math.floor(totalSeconds / 3600);
     totalSeconds %= 3600;
     let minutes = Math.floor(totalSeconds / 60);
     let seconds = totalSeconds % 60;
-    let uptime = `${days} days, ${hours} hours, ${minutes} minutes and ${seconds} seconds`;
     message.channel.send(`${days} days, ${hours} hours, ${minutes} minutes`)
   }
+  if (message.content === 'Rio Avatar') {
+    const embed = new RichEmbed()
+  
+    .setTitle(`${message.author.tag}'s Avatar`)
+    .setImage(`${message.author.displayAvatarURL}`)
+    .setDescription(`${message.author.displayAvatarURL}`)
+    .setColor(0xF08080)
+  
+    message.channel.send(embed)
+    }
 });
+////////////////////////////////////////////////////////////////
+//Minecrat Shit                                              //
+//////////////////////////////////////////////////////////////
 client.on('message', message => {
   if (message.content.includes('#color')) {
     message.channel.send('&11&22&33&44&55&66&77&88&99&aa&bb&cc&dd&ee&ff');
-  } else if (message.content.includes('#songoda')){
+  } else if (message.content.includes('» #songoda')){
     message.channel.send('We use: &aEpicBosses, EpicFarming, EpicFurnances, EpicHeads, EpicHoppers, EpicSpawners, UltimateKit, UltimateTimber, UltimateStacker and FabledSkyblock')
+  } else if (message.content.includes('» #help')) {
+    message.channel.send('Commands: &6#&ehelp &6#&esongoda &6#&egithub &6#&ediscord &6#&elink &6#&eapply &6#&euptime')
+  } else if (message.content.includes('» #github')) {
+    message.channel.send('Here you go :) https://github.com/Oribuin/')
+  } else if (message.content.includes('» ##discord')) {
+    message.channel.send('Discord Invite: /discord');
+  } else if (message.content.includes('» ##link')) {
+    message.channel.send('Link your account to Goli Network Discord w/ /discord link')
+  } else if (message.content.includes('» ##apply')) {
+    message.channel.send('http://bit.ly/GoliApps')
   }
-})
+});
 client.login(config.token)
